@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Restaurant extends Model
+class Store extends Model
 {
     /**
-     * The database table of restaurants
+     * The database table of stores
      *
      * @var string
      */
-    protected $table = 'restaurants';
+    protected $table = 'stores';
 
     /**
      * The primary key of the database table
@@ -46,8 +46,8 @@ class Restaurant extends Model
     /**
      * 取得餐點
      */
-    public function products()
+    public function foods()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Food::class);
     }
 }

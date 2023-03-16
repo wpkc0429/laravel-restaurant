@@ -14,20 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => '/restaurant', 'as' => 'restaurant','namespace' => 'App\Http\Controllers'], function () {
+Route::group(['prefix' => '/store', 'as' => 'store','namespace' => 'App\Http\Controllers'], function () {
 
-    Route::get('/', 'RestaurantController@index')->name('.index');
+    Route::get('/', 'StoreController@index')->name('.index');
 
-    Route::group(['prefix' => '{restaurant}'], function () {
+    Route::group(['prefix' => '{store}'], function () {
 
-        Route::get('/', 'RestaurantController@show')->name('.show');
+        Route::get('/', 'StoreController@show')->name('.show');
 
-        Route::group(['prefix' => '/product', 'as' => '.product'], function () {
+        Route::group(['prefix' => '/food', 'as' => '.food'], function () {
 
-            Route::get('/', 'ProductController@index')->name('.product.index');
+            Route::get('/', 'FoodController@index')->name('.food.index');
 
-            Route::group(['prefix' => '{product}'], function () {
-                Route::get('/', 'ProductController@show')->name('.show');                 
+            Route::group(['prefix' => '{food}'], function () {
+                Route::get('/', 'FoodController@show')->name('.show');                 
             });
 
         });

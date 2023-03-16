@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Food extends Model
 {
     /**
-     * The database table of products
+     * The database table of foods
      *
      * @var string
      */
-    protected $table = 'products';
+    protected $table = 'foods';
 
     /**
      * The primary key of the database table
@@ -26,7 +26,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        "restaurant_id",
+        "store_id",
         "name",
         "unit_price",
         "desc",
@@ -35,8 +35,8 @@ class Product extends Model
     /**
      * 取得店家
      */
-    public function restaurant()
+    public function store()
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Store::class);
     }
 }

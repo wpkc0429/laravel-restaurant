@@ -16,25 +16,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/v1', 'as' => 'api.v1','namespace' => 'App\Http\Controllers\API'], function () {
 
-    Route::get('/restaurants', 'RestaurantController@index')->name('.restaurant.index');
+    Route::get('/stores', 'StoreController@index')->name('.store.index');
 
-    Route::group(['prefix' => '/restaurant', 'as' => '.restaurant'], function () {
+    Route::group(['prefix' => '/store', 'as' => '.store'], function () {
 
-        Route::post('/', 'RestaurantController@store')->name('.store');
-        Route::group(['prefix' => '{restaurant}'], function () {
-            Route::get('/', 'RestaurantController@show')->name('.show');
-            Route::put('/', 'RestaurantController@update')->name('.update');
-            Route::delete('/', 'RestaurantController@destroy')->name('.destroy');
+        Route::post('/', 'StoreController@store')->name('.store');
+        Route::group(['prefix' => '{store}'], function () {
+            Route::get('/', 'StoreController@show')->name('.show');
+            Route::put('/', 'StoreController@update')->name('.update');
+            Route::delete('/', 'StoreController@destroy')->name('.destroy');
 
-            Route::get('/products', 'ProductController@index')->name('.product.index');
+            Route::get('/foods', 'FoodController@index')->name('.food.index');
 
-            Route::group(['prefix' => '/product', 'as' => '.product'], function () {
+            Route::group(['prefix' => '/food', 'as' => '.food'], function () {
 
-                Route::post('/', 'ProductController@store')->name('.store');
-                Route::group(['prefix' => '{product}'], function () {
-                    Route::get('/', 'ProductController@show')->name('.show');
-                    Route::put('/', 'ProductController@update')->name('.update');
-                    Route::delete('/', 'ProductController@destroy')->name('.destroy');                   
+                Route::post('/', 'FoodController@store')->name('.store');
+                Route::group(['prefix' => '{food}'], function () {
+                    Route::get('/', 'FoodController@show')->name('.show');
+                    Route::put('/', 'FoodController@update')->name('.update');
+                    Route::delete('/', 'FoodController@destroy')->name('.destroy');                   
                 });
 
             });
