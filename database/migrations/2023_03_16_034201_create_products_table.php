@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('products', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedbigInteger('restaurant_id')->comment("店家ID")->index();
+            $table->string('name', 255)->comment('名稱');
+            $table->unsignedInteger('unit_price')->comment('價格');
+            $table->string('desc', 20)->comment('備註');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('products');
     }
 };
