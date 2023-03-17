@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('business_time', 20)->comment('營業時間');
             $table->string('lat', 20)->comment('緯度');
             $table->string('lng', 20)->comment('經度');
-            $table->timestamps();
         });
     }
 

@@ -21,7 +21,7 @@ Route::group(['prefix' => '/v1', 'as' => 'api.v1','namespace' => 'App\Http\Contr
     Route::group(['prefix' => '/store', 'as' => '.store'], function () {
 
         Route::post('/', 'StoreController@store')->name('.store');
-        Route::group(['prefix' => '{store}'], function () {
+        Route::group(['prefix' => '{store_id}'], function () {
             Route::get('/', 'StoreController@show')->name('.show');
             Route::put('/', 'StoreController@update')->name('.update');
             Route::delete('/', 'StoreController@destroy')->name('.destroy');
@@ -31,7 +31,7 @@ Route::group(['prefix' => '/v1', 'as' => 'api.v1','namespace' => 'App\Http\Contr
             Route::group(['prefix' => '/food', 'as' => '.food'], function () {
 
                 Route::post('/', 'FoodController@store')->name('.store');
-                Route::group(['prefix' => '{food}'], function () {
+                Route::group(['prefix' => '{food_id}'], function () {
                     Route::get('/', 'FoodController@show')->name('.show');
                     Route::put('/', 'FoodController@update')->name('.update');
                     Route::delete('/', 'FoodController@destroy')->name('.destroy');                   

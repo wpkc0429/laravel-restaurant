@@ -21,6 +21,13 @@ class Food extends Model
     protected $primaryKey = 'id';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * The table's attributes that are mass assignable
      *
      * @var array
