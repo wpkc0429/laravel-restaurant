@@ -62,6 +62,10 @@ class Store extends Model
                 $stores[$store->id] = $store->only(['id','name','phone','business_time','lat','lng']);
                 Cache::forever('stores', $stores);
             }
+            if( Cache::has('store_'.$store->id) ){
+                $cached_store = $store->only(['id','name','phone','business_time','lat','lng']);
+                Cache::forever('store_'.$store->id, $cached_store);
+            }
         });
 
         self::deleting(function ($store) {
@@ -69,6 +73,9 @@ class Store extends Model
                 $stores = Cache::get('stores');
                 $stores->forget($store->id);
                 Cache::forever('stores', $stores);
+            }
+            if( Cache::has('store_'.$store->id) ){
+                Cache::forget('store_'.$store->id);
             }
         });
     }

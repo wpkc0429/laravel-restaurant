@@ -40,8 +40,6 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        $model = new Store;
-
         try {
             $validated = $request->validate([
                 'name' => [
@@ -100,7 +98,6 @@ class StoreController extends Controller
     public function update(Request $request, $store_id)
     {
         $store = Store::findOrFail($store_id);
-        $model = new Store;
         $validated = $request->validate([
             'name' => [
                 'required',

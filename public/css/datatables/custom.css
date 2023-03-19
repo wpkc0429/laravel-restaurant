@@ -1,0 +1,18 @@
+.datatable-menu {
+    display: flex;
+    align-items: center;
+}
+
+.datatable-info {
+    text-align: center;
+}
+
+table.steps-datatable {
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    margin-top: 0px !important;
+}
+
+.dataTables_scrollHeadInner, table.steps-datatable {
+    width:100%!important
+};

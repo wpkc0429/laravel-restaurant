@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function () {
+    return redirect()->route('store.index');
+});
 
 Route::group(['prefix' => '/store', 'as' => 'store','namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('/', 'StoreController@index')->name('.index');
+
+    Route::post('/datatable', 'StoreController@datatable')->name('.datatable');
 
     Route::group(['prefix' => '{store}'], function () {
 
@@ -24,7 +28,9 @@ Route::group(['prefix' => '/store', 'as' => 'store','namespace' => 'App\Http\Con
 
         Route::group(['prefix' => '/food', 'as' => '.food'], function () {
 
-            Route::get('/', 'FoodController@index')->name('.food.index');
+            Route::get('/', 'FoodController@index')->name('.index');
+
+            Route::post('/datatable', 'FoodController@datatable')->name('.datatable');
 
             Route::group(['prefix' => '{food}'], function () {
                 Route::get('/', 'FoodController@show')->name('.show');                 
