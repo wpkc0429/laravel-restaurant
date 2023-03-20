@@ -22,11 +22,11 @@ class StoreController extends Controller
         }else{
             $stores = Cache::rememberForever('stores', function () {
                 $stores = Store::select('id','name','phone','business_time','lat','lng')->get()->keyBy('id');
-                
+
                 return $stores;
             });
         }
-        
+
         return response()->json([
             "success" => true,
             "data" => $stores,
@@ -57,12 +57,12 @@ class StoreController extends Controller
                 "data" => $e->errors(),
             ], 400);
         }
-        
+
         $store = Store::create($validated);
 
         return response()->json([
             "success" => true,
-            "data" => '新增成功',
+            "data" => $store->only(['id','name','phone','business_time','lat','lng']),
         ], 200);
     }
 
@@ -78,7 +78,7 @@ class StoreController extends Controller
         }else{
             $cached_store = Cache::rememberForever('store_'.$store_id, function () use($store_id){
                 $cached_store = Store::findOrFail($store_id)->only(['id','name','phone','business_time','lat','lng']);
-                
+
                 return $cached_store;
             });
         }
@@ -100,20 +100,20 @@ class StoreController extends Controller
         $store = Store::findOrFail($store_id);
         $validated = $request->validate([
             'name' => [
-                'required',
-                'max:255'
-              ],
-              'phone' => ['required','max:20'],
-              'business_time' => ['required','max:20'],
-              'lat' => ['required','max:20'],
-              'lng' => ['required','max:20'],
+              'required',
+              'max:255'
+            ],
+            'phone' => ['required','max:20'],
+            'business_time' => ['required','max:20'],
+            'lat' => ['required','max:20'],
+            'lng' => ['required','max:20'],
         ]);
 
-        $store->update($validated);     
-        
+        $store->update($validated);
+
         return response()->json([
             "success" => true,
-            "data" => '更新成功',
+            "data" => $store->only(['id','name','phone','business_time','lat','lng']),
         ], 200);
     }
 

@@ -23,11 +23,11 @@ class FoodController extends Controller
         }else{
             $foods = Cache::rememberForever('store_'.$store_id.'_foods', function () use($store_id){
                 $foods = Food::select('id','store_id','name','unit_price','desc')->where('store_id',$store_id)->get()->keyBy('id');
-                
+
                 return $foods;
             });
         }
-        
+
         return response()->json([
             "success" => true,
             "data" => $foods,
@@ -59,12 +59,12 @@ class FoodController extends Controller
         }
 
         $validated['store_id'] = $store_id;
-        
+
         $food = Food::create($validated);
 
         return response()->json([
             "success" => true,
-            "data" => '新增成功',
+            "data" => $food->only(['id','store_id','name','unit_price','desc']),
         ], 200);
     }
 
@@ -81,7 +81,7 @@ class FoodController extends Controller
         }else{
             $cached_food = Cache::rememberForever('store_'.$store_id.'_food_'.$food_id, function () use($store_id, $food_id){
                 $cached_food = Food::where(['id'=>$food_id,'store_id'=>$store_id])->firstOrFail()->only(['id','store_id','name','unit_price','desc']);
-                
+
                 return $cached_food;
             });
         }
@@ -111,11 +111,11 @@ class FoodController extends Controller
               'desc' => ['required','max:65535'],
         ]);
 
-        $food->update($validated);     
-        
+        $food->update($validated);
+
         return response()->json([
             "success" => true,
-            "data" => '更新成功',
+            "data" => $food->only(['id','store_id','name','unit_price','desc']),
         ], 200);
     }
 
